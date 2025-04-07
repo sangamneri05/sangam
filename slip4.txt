@@ -1,0 +1,169 @@
+1. Using python code sort the tuple in ascending and descending order 5, -3, 0, 1, 6, -6, 2.
+->
+t = (5, -3, 0, 1, 6,-6, 2)
+s = tuple(sorted(t))
+print(s)
+
+2. Write python program which deals with concatenation and repetition of lists.
+List1 = [15, 20, 25, 30, 35, 40]
+List2 = [7, 14, 21, 28, 35, 42]
+(a) Find List1 + List2
+(b) Find 9*List1
+(c) Find 7*List2
+->
+List1 = [15, 20, 25, 30, 35, 40]
+List2 = [7, 14, 21, 28, 35, 42]
+print(List1 + List2)
+print(List1 * 9)
+print(List2 * 7)
+
+3. Write Python code to find the square of odd numbers from 1 to 20 using while loop.
+->
+i=1
+while(i<=20):
+    if i%2!=0:
+        print('%d^2=%d'%(i,pow(i,2)))
+    i=i+1
+
+Q.2. Attempt any two of the following. [10]
+1. Using Python construct the following matrices.
+1. An identity matrix of order 10 × 10.
+2. Zero matrix of order 7 × 3.
+3. Ones matrix of order 5 × 4.
+->
+from sympy import *
+print('A=',eye(10,10))
+print('A=',zeros(7,3))
+print('A=',ones(5,4))
+
+2. Find the data type of the following data by using Python code.
+a. number
+b. 31.25
+c. 8 + 4j
+d. Mathematics
+e. 49
+->
+a="number"
+print(type(a))
+b=31.25
+print(type(b))
+c=8+4j
+print(type(c))
+d="Mathematics"
+print(type(d))
+e=49
+print(type(e))
+
+
+3. Write Python program to find the determinant of matrices
+A =
+1 0 5
+2 1 6
+3 4 0
+ and B =
+2 5
+−1 4
+->
+import numpy as np
+a = np.array([[1,0,5],[2,1,6],[3,4,0]])
+print(np.linalg.det(a))
+b = np.array([[2,5],[-1,4]])
+print(np.linalg.det(b))
+
+.
+Q.3. a. Attempt any one of the following. [7]
+1. Write Python program to estimate the value of the integral R π 0 xsin(x)dx using Simpson’s ( 13)rd rule (n=6).
+->
+def f(x):
+    return x*sin(x)
+print(Simpson13(f,0,pi,6))
+
+
+    OR
+
+from math import*
+def simpson(f,a,b,n):
+    h=float(b-a)/n
+    result=f(a)+f(b)
+    for i in range(1,n):
+        k=a+i*h
+        if i%2==0:
+            result+=2*f(k)
+        else:
+            result+=4*f(k)
+        result*=h/3
+        return result
+
+def f(x):
+    return x*sin(x)
+
+print(simpson(f , 0 , pi , 6))
+
+
+2. Write Python program to estimate a root of an equation f(x) = 3x − cos(x) − 1
+using Newton–Raphson method correct up to four decimal places.
+->
+from math import*
+def newtonRaphson(f,g,x0,e,N):
+    x0=float(x0)
+    e=float(e)
+    N=int(N)
+    step=1
+    flag=1
+    condition = True
+    while condition:
+        if g(x0) == 0.0:
+            print("Divide by zero error!")
+            break
+        x1 = x0 - f(x0)/g(x0)
+        print("Iteration-%d, x1 = %0.6f and f(x1) = %0.6f" %(step, x1, f(x1)))
+        x0 = x1
+        step = step + 1
+        if step > N:
+            flag = 0
+            break
+        condition = abs(f(x1)) > e
+        if flag==1:
+            print("\nRequired root is: %0.8f" %x1)
+        else:
+            print("\nNot Convergent")
+
+def f(x):
+    return (3*x) - cos(x) - 1
+
+def g(x):
+    return 3 + sin(x)
+
+newtonRaphson(f,g,0.5,0.00001,100)
+
+
+
+#b. Attempt any one of the following. [8]
+1. Write Python program to find all positive prime numbers less then given number n.
+->
+def isprime(n):
+    flag = 1
+    for i in range(2 , n):
+        if n % i == 0:
+            flag = 0
+            break
+
+    if flag == 1:
+        return 1
+    else:
+        return 0
+
+def prime(n):
+    for i in range(1 , n + 1):
+        if isprime(i) == 1:
+            print(i)
+        else:
+            continue
+
+prime(int(input("Enter any number: ")))
+
+
+2. Write Python program to evaluate f(2.5) by forward difference formula of the given
+data.
+x 0 1 2 3
+Y=f(x) 2 1 2 10
